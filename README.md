@@ -1,2 +1,2 @@
-# prognostics-maintenance
+# prognostic-maintenance
 Prognostic Techniques for Vehicle Maintenance
