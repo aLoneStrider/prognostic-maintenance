@@ -98,12 +98,12 @@ setnumber = 'FD00'+str(sn)
 nc = 21
 
 #Training set
-train = utils.read_set(data_path, setnumber, 'train')
-cat_train, scale_train = utils.find_col_types(train)
+train = read_set(data_path, setnumber, 'train')
+cat_train, scale_train = find_col_types(train)
 
 #Test set
-test = utils.read_set(data_path, setnumber, 'test')
-cat_test, scale_test = utils.find_col_types(test)
+test = read_set(data_path, setnumber, 'test')
+cat_test, scale_test = find_col_types(test)
 
 #Labels
 label = pd.read_csv(os.path.join(data_path, 'RUL_'+setnumber+'.txt'), header=None)
@@ -112,8 +112,8 @@ label.columns = ['id', 'RUL']
 label['id'] = label['id'] + 1  #index is 0-bound but part_ids are 1-bound
 
 #Add labels
-train = utils.calculate_train_RUL(train)
-test = utils.calculate_test_RUL(test, label)
+train = calculate_train_RUL(train)
+test = calculate_test_RUL(test, label)
 
 #Make all values float
 train = train.astype('float64')
@@ -178,9 +178,9 @@ plt.show()
 ## plot correlations for unit i
 i = np.random.choice(train.id)
 df = train.loc[train.id==i].sort_values(by='cycle')
-utils.plot_correlations(df, drop_cols=['id', 'cycle', 'RUL'], 
+plot_correlations(df, drop_cols=['id', 'cycle', 'RUL'], 
                       title='%s unit %s'%(setnumber, i), plot_path=plot_path, plot_name=setnumber)
-utils.plot_all_measurements(df, plot_path='plots', plot_name='raw_sequences.png')
+plot_all_measurements(df, plot_path='plots', plot_name='raw_sequences.png')
 
 ## SCALE DATA
 #normalize features (using MinMaxScaler)
